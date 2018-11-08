@@ -1,0 +1,95 @@
+{
+  "settings": {
+    "name": "Site-11-09_0038",
+    "currentPage": "index.html",
+    "theme": {
+      "name": "lightamp",
+      "title": "LightAMP",
+      "styling": {
+        "primaryColor": "#F9D5BD",
+        "secondaryColor": "#bbe0e2",
+        "successColor": "#c6e2ba",
+        "infoColor": "#f5edf6",
+        "warningColor": "#7F7E7E",
+        "dangerColor": "#fe8b8b",
+        "mainFont": "Roboto",
+        "display1Font": "Reem Kufi",
+        "display1Size": 6,
+        "display2Font": "Reem Kufi",
+        "display2Size": 4,
+        "display5Font": "Reem Kufi",
+        "display5Size": 2.25,
+        "display6Font": "Roboto",
+        "display6Size": 1.3,
+        "display7Font": "Roboto",
+        "display7Size": 1.1,
+        "display4Font": "Reem Kufi",
+        "display4Size": 1,
+        "isRoundedButtons": false,
+        "isScrollToTopButton": false,
+        "arrowColor": "#F9D5BD"
+      }
+    },
+    "path": "@PROJECT_PATH@",
+    "versionFirst": "4.8.6",
+    "siteFonts": [],
+    "uniqCompNum": 2,
+    "versionPublish": "4.8.6"
+  },
+  "pages": {
+    "index.html": {
+      "settings": {
+        "main": true,
+        "title": "Home",
+        "meta_descr": "",
+        "header_custom": "",
+        "footer_custom": "",
+        "html_before": ""
+      },
+      "components": [
+        {
+          "_styles": {
+            "--duration": "@textSpeed",
+            "& when not (@fullScreen)": {
+              "padding-top": "(@paddingTop * 15px)",
+              "padding-bottom": "(@paddingBottom * 15px)"
+            },
+            "& when (@bg-type = 'color')": {
+              "background-color": "@bg-value"
+            },
+            "& when (@bg-type = 'image')": {
+              "background-image": "url(@bg-value)"
+            },
+            ".container": {
+              "z-index": "1"
+            },
+            ".mbr-overlay": {
+              "background-color": "@overlayColor",
+              "opacity": "@overlayOpacity"
+            },
+            ".mbr-text": {
+              "padding-top": "0"
+            },
+            ".animated-text": {
+              "position": "absolute",
+              "color": "@textColor",
+              "opacity": "@textOpacity",
+              "white-space": "nowrap",
+              "z-index": "1",
+              "top": "calc(50% ~\"- @{textSize}rem / 2\")",
+              "font-size": "~\"@{textSize}rem\""
+            }
+          },
+          "_name": "header7",
+          "_customHTML": "<amp-animation layout=\"nodisplay\" trigger=\"visibility\">\n    <script type=\"application/json\">\n    {\n        \"--width\": \"calc(0px - width('.animated-text'))\",\n        \"selector\": \".animated-text\",\n        \"duration\": \"calc(20s - 19s * var(--duration) / 100)\",\n        \"iterations\": \"Infinity\",\n        \"keyframes\": {\"transform\": [\"translateX(100vw)\", \"translateX(var(--width))\"]}\n    }\n    </script>\n</amp-animation>\n\n<section class=\"header7\" group=\"Headers\" plugins=\"amp-main, amp-animation\" mbr-class=\"{'mbr-fullscreen': fullScreen}\">\n\n    <mbr-parameters>\n    <!-- Block parameters controls (Blue \"Gear\" panel) -->\n        <input type=\"checkbox\" title=\"Full Screen\" name=\"fullScreen\" checked>\n        <input type=\"range\" inline title=\"Top\" name=\"paddingTop\" min=\"0\" max=\"9\" step=\"1\" value=\"6\" condition=\"fullScreen == false\">\n        <input type=\"range\" inline title=\"Bottom\" name=\"paddingBottom\" min=\"0\" max=\"9\" step=\"1\" value=\"6\" condition=\"fullScreen == false\">\n        <input type=\"checkbox\" title=\"Show Title\" name=\"showTitle\" checked>\n        <input type=\"checkbox\" title=\"Show Text\" name=\"showText\" checked>\n        <input type=\"checkbox\" title=\"Show Buttons\" name=\"showButtons\" checked>\n        <input type=\"checkbox\" title=\"Show Animated Text\" name=\"showAnimatedText\">\n\n        <fieldset type=\"background\" name=\"bg\">\n            <input type=\"image\" title=\"Background Image\" value=\"@PROJECT_PATH@/assets/images/mbr-1920x1141.jpg\" selected>\n            <input type=\"color\" title=\"Background Color\" value=\"#3d8f93\">\n        </fieldset>\n\n        <input type=\"checkbox\" title=\"Overlay\" name=\"overlay\" condition=\"bg.type!='color'\" checked>\n        <input type=\"color\" title=\"Overlay Color\" name=\"overlayColor\" value=\"#ffffff\" condition=\"bg.type!='color' && overlay\">\n        <input type=\"range\" inline title=\"Overlay Opacity\" name=\"overlayOpacity\" min=\"0\" max=\"1\" step=\"0.1\" value=\"0.8\" condition=\"bg.type!='color' && overlay\">\n\n        <header codition=\"showAnimatedText\">Animated Background Text</header>\n        <select title=\"Text Title\" name=\"textTitle\" condition=\"showAnimatedText\">\n            <option value=\"title1\" selected>Title 1</option>\n            <option value=\"title2\">Title 2</option>\n            <option value=\"title3\">Title 3</option>\n            <option value=\"text\">Text</option>\n            <option value=\"text2\">Text 2</option>\n            <option value=\"menu\">Menu</option>\n        </select>\n        <input type=\"color\" title=\"Text Color\" name=\"textColor\" value=\"#94a9aa\" condition=\"showAnimatedText\">\n        <input type=\"range\" inline title=\"Text Size\" name=\"textSize\" min=\"1\" max=\"20\" value=\"14\" step=\"1\" condition=\"showAnimatedText\">\n        <input type=\"range\" inline title=\"Text Opacity\" name=\"textOpacity\" min=\"0\" max=\"1\" value=\"0.4\" step=\"0.1\" condition=\"showAnimatedText\">\n        <input type=\"range\" inline title=\"Speed\" name=\"textSpeed\" min=\"50\" max=\"100\" value=\"60\" step=\"1\" condition=\"showAnimatedText\">\n        <input type=\"text\" title=\"Text\" inline name=\"animatedText\" value=\"Light AMP\" condition=\"showAnimatedText\">\n    <!-- End block parameters -->\n    </mbr-parameters>\n\n    <div class=\"animated-text\" mbr-class=\"{'display-1': textTitle == 'title1',\n                     'display-2': textTitle == 'title2',\n                     'display-5': textTitle == 'title3',\n                     'display-6': textTitle == 'text',\n                     'display-7': textTitle == 'text2',\n                     'display-4': textTitle == 'menu'}\" mbr-if=\"showAnimatedText\">\n    </div>\n    <div class=\"mbr-overlay\" mbr-if=\"overlay\"></div>\n    <div class=\"container\">\n        <h1 class=\"mbr-section-title mbr-fonts-style align-center mbr-bold mbr-black l-spacing3\" mbr-theme-style=\"display-2\" data-app-selector=\".mbr-section-title\" mbr-if=\"showTitle\">vnaresources.com.my</h1>\n        \n        <p class=\"mbr-fonts-style mbr-text align-center mbr-black\" mbr-theme-style=\"display-6\" mbr-if=\"showText\" data-app-selector=\".mbr-text, .mbr-section-btn\">\n            Under Construction<br><br>Design By Web For Soho Solution<br>www.webforsoho.com</p>\n\n        <div class=\"mbr-section-btn align-center\" mbr-if=\"showButtons\" data-toolbar=\"-mbrBtnMove\" mbr-buttons mbr-theme-style=\"display-4\"><a class=\"btn btn-md btn-black\" href=\"https://mobirise.com\" data-app-placeholder=\"Type Text\">\n                LEARN MORE\n            </a></div>\n    </div>\n</section>",
+          "_cid": "r8PpRw7Hr7",
+          "_protectedParams": [],
+          "_global": false,
+          "_once": false,
+          "_params": {},
+          "_anchor": "header7-1"
+        }
+      ]
+    }
+  }
+}
